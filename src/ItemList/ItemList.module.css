@@ -1,0 +1,81 @@
+.item {
+  display: flex;
+  gap: 2rem;
+  background: var(--gray-500);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.check { 
+  width: 1.6rem !important;
+  height: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkedCircle {
+  background: var(--purple-dark);
+  color: var(--gray-100);
+  border-radius: 100%;
+  padding: 0.3rem;
+  transform: 0.2s;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.checkedCircle:hover {
+  fill: var(--blue-dark);
+  background: var(--purple);
+}
+
+.unCheckCircle {
+  color: var(--blue) !important;
+  border-radius: 100%;
+  transform: 0.2s;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1.5rem;
+}
+
+.unCheckCircle:hover {
+  background: rgba(var(--blue-dark-rgb), 0.2);
+  color: transparent !important;
+  border: 2.1px var(--blue) solid !important;
+  font-size: 20px;
+}
+
+.taskComplete {
+  text-align: justify;
+  text-decoration: line-through;
+  color: var(--gray-300) !important;
+  font-size: 0.875rem;
+}
+
+.taskUnChecked {
+  text-align: justify;
+  color: var(--gray-100) !important;
+  font-size: 0.875rem;
+}
+
+.trash button {
+  background: transparent;
+  color: var(--gray-300);
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  line-height: 0;
+  right: 0;
+  border: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.trash button:hover {
+  background: var(--gray-400);
+  color: var(--danger);
+}
+
+.item + .item {
+  margin-top: 0.75rem
+}

@@ -1,0 +1,12 @@
+.input {
+  width: 100%;
+  padding: 1rem;
+  border: 0;
+  border-radius: 8px;
+  background: var(--gray-500);
+  color: var(--gray-300);
+}
+
+input:focus {
+  color: var(--gray-100);
+}

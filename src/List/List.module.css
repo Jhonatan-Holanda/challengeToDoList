@@ -1,0 +1,28 @@
+.headerList{
+  display: flex;
+  justify-content: space-between;
+  margin: 4rem 0px 1.5rem 0px;
+} 
+
+.taskCreated {
+  color: var(--blue);
+  font-size: 0.875rem;
+  gap: 0.5rem;
+  font-weight: bold;
+}
+
+.taskComplete {
+  color: var(--purple);
+  font-size: 0.875rem;
+  gap: 0.5rem;
+  font-weight: bold;
+}
+
+.headerList span {
+  background: var(--gray-400);
+  color: var(--gray-200);
+  font-weight: bold;
+  font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 8px;
+}

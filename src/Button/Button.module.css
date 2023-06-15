@@ -1,0 +1,32 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  color: var(--gray-100);
+  background: var(--blue-dark);
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+.button svg {
+  margin-left: 0.5rem;
+  color: var(--gray-100);
+}
+
+.button:hover {
+  background:  var(--blue);
+}
+
+.button:disabled:hover{
+  background-color: var(--blue-dark);
+}
+
+.button:disabled{
+  cursor: not-allowed;
+  opacity: 0.7;
+}
