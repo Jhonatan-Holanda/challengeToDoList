@@ -10,16 +10,21 @@ export interface ItemProps {
 interface Item {
   item: ItemProps,
   onRemoveTask: (task: number) => void;
+  onChangeCheck: (task: number) => void;
 }
 
-export function ItemList({ item, onRemoveTask }: Item ){
+export function ItemList({ item, onRemoveTask, onChangeCheck }: Item ){
   return(
     <div className={styles.item}>
       <div className={styles.check}>
         {(item.check) ?
-          <Check className={styles.checkedCircle} weight='bold'/>
+          <button onClick={() => onChangeCheck(item.id)}>
+            <Check className={styles.checkedCircle} weight='bold'/>
+          </button>
         :
-          <Circle className={styles.unCheckCircle} weight='bold'/>
+          <button onClick={() => onChangeCheck(item.id)}>
+            <Circle className={styles.unCheckCircle} weight='bold'/>
+          </button>
         }
       </div>
       <div className={(item.check)? styles.taskComplete : styles.taskUnChecked}>

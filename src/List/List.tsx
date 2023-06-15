@@ -1,41 +1,42 @@
-import { useEffect, useState } from 'react';
 import styles from './List.module.css';
 import { ItemList, ItemProps } from '../ItemList/ItemList';
+import { useEffect, useState } from 'react';
 
 interface ListProps {
   list: ItemProps[];
   onRemoveTask: (task: number) => void;
+  onChangeCheck: (task: number) => void;
 }
 
-export function List({list, onRemoveTask}: ListProps){
-  const [taskCreated, setTaskCreated] = useState(0);
-  const [taskComplete, setTaskCompleted] = useState(0);
+export function List({list, onRemoveTask, onChangeCheck}: ListProps){
+  const [tasksCreated, setTaskCreated] = useState(0);
+  const [tasksComplete, setTaskCompleted] = useState(0);
 
   useEffect(() => {
-    const countTaskCreated = list.length;
-    const countTaskComplete = list.filter(item =>{
-      return item.check == true;
+    const countTasksCreated = list.length;
+    const countTasksComplete = list.filter(task =>{
+      return task.check == true;
     }).length
 
-    setTaskCompleted(countTaskComplete);
-    setTaskCreated(countTaskCreated);
+    setTaskCompleted(countTasksComplete);
+    setTaskCreated(countTasksCreated);
 
-  }, [taskCreated, taskComplete]);
+  }, [list]);
 
   return (
-    <div className={styles.list}>
+    <div>
       <div className={styles.headerList}>
         <div>
-          <strong className={styles.taskCreated}>Tarefas criadas </strong><span>{taskCreated}</span>
+          <strong className={styles.taskCreated}>Tarefas criadas </strong><span>{tasksCreated}</span>
         </div>
         <div>
-          <strong className={styles.taskComplete}>Concluídas </strong><span>{taskComplete} de {taskCreated}</span>
+          <strong className={styles.taskComplete}>Concluídas </strong><span>{tasksComplete} de {tasksCreated}</span>
         </div>
       </div>
 
-      <div className={styles.list}>
-        {list.map((item) => {
-          return <ItemList key={item.id} item={item} onRemoveTask={onRemoveTask}/>
+      <div>
+        {list.map((task) => {
+          return <ItemList key={task.id} item={task} onRemoveTask={onRemoveTask} onChangeCheck={onChangeCheck}/>
         })}
       </div>
     </div>

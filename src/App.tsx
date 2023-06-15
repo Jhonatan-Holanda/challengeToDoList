@@ -1,4 +1,4 @@
-import { Check, PlusCircle  } from 'phosphor-react';
+import { PlusCircle  } from 'phosphor-react';
 
 import styles from'./App.module.css';
 import { Button } from './Button/Button';
@@ -6,7 +6,7 @@ import { Header } from './Header/Header';
 import { Input } from './Input/Input';
 import { List } from './List/List';
 import { ItemProps } from './ItemList/ItemList';
-import { ChangeEvent, InvalidEvent, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 const mockList: ItemProps[] = [
   {
@@ -38,7 +38,6 @@ const mockList: ItemProps[] = [
 
 function App() {
   const [newTask, setNewTask] = useState('');
-
   const [taskList, setTaskList] = useState(mockList);
 
   function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
@@ -46,28 +45,37 @@ function App() {
     setNewTask(event.target.value);
   }
 
-  function handleNewTaskInvalid(event: InvalidEvent<HTMLInputElement>){
-    event.target.setCustomValidity('Esse campo é obrigatório.')
-  }
-
   function handleNewTask(){
     const task = {
-      id: taskList[taskList.length-1].id + 1,
+      id: (taskList.length === 0) ? 0 : taskList[taskList.length-1]?.id + 1,
       check: false,
       description: newTask,
     }
 
-    taskList.push(task);
+    setTaskList([...taskList, task ]);
 
     setNewTask('');
   }
 
   function handleRemoveTask(taskToDelete: number){
-    const tasksWithoutDeleteOne = taskList.filter(task => {
+    const tasksDeletingOne = taskList.filter(task => {
       return task.id != taskToDelete;
     })
 
-    setTaskList(tasksWithoutDeleteOne);
+    setTaskList(tasksDeletingOne);
+  }
+
+  function handleChangeCheck(taskToChange: number){
+    const tasksWithChangeCheck: ItemProps[] = taskList.map((task) => 
+      (task.id === taskToChange) ? 
+        {
+          ...task,
+          check: task.check === true ? false : true
+        }
+      : 
+        task
+    )
+    setTaskList(tasksWithChangeCheck)
   }
 
   const isNewTaskEmpty = newTask.length === 0;
@@ -75,18 +83,18 @@ function App() {
   return (
     <>
       <Header />
+
       <div className={styles.wrapper}>
         <div className={styles.newTask}>
           <Input 
             onChange={handleNewTaskChange}
-            onInvalid={handleNewTaskInvalid}
             value={newTask} 
             type='text' 
             placeholder='Adicione uma nova tarefa'
           />
           <Button 
             onClick={handleNewTask}
-            disabled={isNewTaskEmpty} 
+            disabled={isNewTaskEmpty}
             text="Criar" 
             icon={
               <PlusCircle size={16} weight='bold'/>
@@ -94,7 +102,11 @@ function App() {
           />
         </div>
         <main>
-          <List list={taskList} onRemoveTask={handleRemoveTask} />
+          <List 
+            list={taskList} 
+            onRemoveTask={handleRemoveTask} 
+            onChangeCheck={handleChangeCheck}
+          />
         </main>
       </div>
     </>
