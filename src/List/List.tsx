@@ -1,6 +1,7 @@
 import styles from './List.module.css';
 import { ItemList, ItemProps } from '../ItemList/ItemList';
 import { useEffect, useState } from 'react';
+import { EmptyList } from '../EmptyList/EmptyList';
 
 interface ListProps {
   list: ItemProps[];
@@ -35,9 +36,15 @@ export function List({list, onRemoveTask, onChangeCheck}: ListProps){
       </div>
 
       <div>
-        {list.map((task) => {
-          return <ItemList key={task.id} item={task} onRemoveTask={onRemoveTask} onChangeCheck={onChangeCheck}/>
-        })}
+        {
+          (list.length != 0) 
+            ?
+              list.map((task) => {
+                return <ItemList key={task.id} item={task} onRemoveTask={onRemoveTask} onChangeCheck={onChangeCheck}/>
+              })
+            :
+              <EmptyList />
+        }
       </div>
     </div>
   );
