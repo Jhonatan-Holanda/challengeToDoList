@@ -1,6 +1,6 @@
 .item {
-  display: flex;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: 3rem 1fr 3rem;
   background: var(--gray-500);
   border-radius: 8px;
   padding: 1rem;
@@ -56,6 +56,11 @@
   text-align: justify;
   color: var(--gray-100) !important;
   font-size: 0.875rem;
+}
+
+.trash {
+  display: flex;
+  justify-content: center;
 }
 
 .trash button {

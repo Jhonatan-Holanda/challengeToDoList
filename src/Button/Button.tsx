@@ -7,7 +7,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: React.ReactNode;
 }
 
-export function Button({text, icon, ...props}: ButtonProps){
+export function Button({ text, icon, ...props}: ButtonProps){
+  
   return(
     <button className={styles.button} {...props}>
       {text}

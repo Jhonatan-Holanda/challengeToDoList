@@ -1,4 +1,4 @@
-import { PlusCircle  } from 'phosphor-react';
+import { Check, PlusCircle  } from 'phosphor-react';
 
 import styles from'./App.module.css';
 import { Button } from './Button/Button';
@@ -39,6 +39,8 @@ const mockList: ItemProps[] = [
 function App() {
   const [newTask, setNewTask] = useState('');
 
+  const [taskList, setTaskList] = useState(mockList);
+
   function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
     event.target.setCustomValidity('');
     setNewTask(event.target.value);
@@ -46,6 +48,26 @@ function App() {
 
   function handleNewTaskInvalid(event: InvalidEvent<HTMLInputElement>){
     event.target.setCustomValidity('Esse campo é obrigatório.')
+  }
+
+  function handleNewTask(){
+    const task = {
+      id: taskList[taskList.length-1].id + 1,
+      check: false,
+      description: newTask,
+    }
+
+    taskList.push(task);
+
+    setNewTask('');
+  }
+
+  function handleRemoveTask(taskToDelete: number){
+    const tasksWithoutDeleteOne = taskList.filter(task => {
+      return task.id != taskToDelete;
+    })
+
+    setTaskList(tasksWithoutDeleteOne);
   }
 
   const isNewTaskEmpty = newTask.length === 0;
@@ -63,6 +85,7 @@ function App() {
             placeholder='Adicione uma nova tarefa'
           />
           <Button 
+            onClick={handleNewTask}
             disabled={isNewTaskEmpty} 
             text="Criar" 
             icon={
@@ -71,7 +94,7 @@ function App() {
           />
         </div>
         <main>
-          <List list={mockList}/>
+          <List list={taskList} onRemoveTask={handleRemoveTask} />
         </main>
       </div>
     </>

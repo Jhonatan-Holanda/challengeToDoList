@@ -8,10 +8,11 @@ export interface ItemProps {
 }
 
 interface Item {
-  item: ItemProps
+  item: ItemProps,
+  onRemoveTask: (task: number) => void;
 }
 
-export function ItemList({ item }: Item ){
+export function ItemList({ item, onRemoveTask }: Item ){
   return(
     <div className={styles.item}>
       <div className={styles.check}>
@@ -25,7 +26,7 @@ export function ItemList({ item }: Item ){
         <p>{item.description}</p>
       </div>
       <div className={styles.trash}>
-        <button>
+        <button onClick={ () => onRemoveTask(item.id) }>
           <Trash  />
         </button>
       </div>
