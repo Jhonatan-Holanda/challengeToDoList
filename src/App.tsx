@@ -8,37 +8,9 @@ import { List } from './List/List';
 import { ItemProps } from './ItemList/ItemList';
 import { ChangeEvent, useState } from 'react';
 
-const mockList: ItemProps[] = [
-  {
-    id: 1,
-    check: true,
-    description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora, eius sint labore quisquam est voluptatem accusamus iusto voluptate et possimus quas autem nam rerum delectus repellat saepe corporis consequuntur aut?'
-  },
-  {
-    id: 2,
-    check: false,
-    description: 'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.'
-  },
-  {
-    id: 3,
-    check: true,
-    description: 'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.'
-  },
-  {
-    id: 4,
-    check: false,
-    description: 'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.'
-  },
-  {
-    id: 5,
-    check: true,
-    description: 'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.'
-  }
-]
-
 function App() {
   const [newTask, setNewTask] = useState('');
-  const [taskList, setTaskList] = useState(mockList);
+  const [taskList, setTaskList] = useState<ItemProps[]>([]);
 
   function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
     event.target.setCustomValidity('');
